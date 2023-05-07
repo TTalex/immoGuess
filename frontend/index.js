@@ -1,3 +1,7 @@
+/* Otionnal reference to leaderboardsSdk, can be removed */
+if (!window.LeaderboardsSdk) {
+    window.LeaderboardsSdk = null
+}
 const fetchData = async () => {
     const data = await fetch('/api')
     return await data.json()
@@ -105,6 +109,10 @@ const Nav = () => {
                             </a>
                         </div>
                     </div>
+                    {/* Otionnal reference to leaderboardsSdk, can be removed */}
+                    {LeaderboardsSdk && <div className="navbar-item">
+                        <a href="http://localhost:3000" target='_blank'  rel="noreferrer" alt="login" style={{color: "transparent", textShadow:  LeaderboardsSdk.getId() ? "0 0 0 hsl(171, 100%, 41%)" : "0 0 0 lightgray"}}>👤</a>
+                    </div>}
                 </div>
             </div>
         </nav>
@@ -150,6 +158,9 @@ const App = () => {
             }
         })
         setResult(score)
+        /* Otionnal reference to leaderboardsSdk, can be removed */
+        if (LeaderboardsSdk)
+            LeaderboardsSdk.storeScore("ImmoGuess", randomEstateAd.transactionType, score)
     }
     return (
         <div className="main">
